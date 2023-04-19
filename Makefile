@@ -23,4 +23,4 @@ docker/build:
 	docker build --no-cache	--tag=aimharder .
 
 docker/tests:
-	 docker run aimharder /bin/sh -c 'make tests'
+	docker run aimharder /bin/sh -c 'make tests'

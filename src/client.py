@@ -14,7 +14,6 @@ from exceptions import (
     BookingFailed,
     IncorrectCredentials,
     TooManyWrongAttempts,
-    MESSAGE_BOOKING_FAILED_UNKNOWN,
     MESSAGE_BOOKING_FAILED_NO_CREDIT,
 )
 
