@@ -23,4 +23,4 @@ docker/build:
 	docker build --no-cache	--tag=fitbot .
 
 docker/tests:
-	 docker run -v fitbot /bin/sh -c 'make tests'
+	 docker run fitbot -D /bin/sh -c 'make tests'
