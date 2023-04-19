@@ -4,16 +4,6 @@ from datetime import datetime, timedelta
 
 from client import AimHarderClient
 from exceptions import NoBookingGoal
-from dotenv import load_dotenv
-
-load_dotenv()
-booking_goals_example = os.getenv("booking_goals_example")
-email = os.getenv("email")
-password = os.getenv("password")
-booking_goals = booking_goals_example
-box_name = os.getenv("box_name")
-box_id = os.getenv("box_id")
-days_in_advance = os.getenv("days_in_advance")
 
 
 def get_booking_goal_time(day: datetime, booking_goals):
