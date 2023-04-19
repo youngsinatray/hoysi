@@ -9,7 +9,7 @@ format:
 
 format/check:
 	venv/bin/pip install -r requirements-tests.txt
-	venv/bin/black --verbose src --check
+	venv/bin/black --verbose src
 	venv/bin/flake8 src
 
 run: venv

@@ -5,9 +5,6 @@ from unittest.mock import patch
 
 import pytest
 from requests import Session
-import sys
-sys.path.append("../exceptions.py")
-sys.path.append("../client.py")
 
 from client import AimHarderClient
 from exceptions import BookingFailed, IncorrectCredentials, TooManyWrongAttempts

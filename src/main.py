@@ -1,4 +1,5 @@
-import argparse, json
+import argparse
+import json
 from datetime import datetime, timedelta
 
 
@@ -57,6 +58,6 @@ if __name__ == "__main__":
     parser.add_argument("--days-in-advance", required=False, type=int, default=3)
 
     args = parser.parse_args()
-    print('A')
+    print("A")
     input = {key: value for key, value in args.__dict__.items() if value != ""}
     main(**input)
