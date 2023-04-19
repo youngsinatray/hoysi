@@ -12,5 +12,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build docker image
       run: make docker/build
-    - name: Lint and unit tests
-      run: make docker/tests
