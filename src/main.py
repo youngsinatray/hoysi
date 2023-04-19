@@ -1,5 +1,4 @@
-import argparse, os
-import json
+import os
 from datetime import datetime, timedelta
 
 
@@ -8,13 +7,13 @@ from exceptions import NoBookingGoal
 from dotenv import load_dotenv
 
 load_dotenv()
-booking_goals_example = os.getenv('booking_goals_example')
-email= os.getenv('email')
-password= os.getenv('password')
-booking_goals=booking_goals_example
-box_name= os.getenv('box_name')
-box_id= os.getenv('box_id')
-days_in_advance= os.getenv('days_in_advance')
+booking_goals_example = os.getenv("booking_goals_example")
+email = os.getenv("email")
+password = os.getenv("password")
+booking_goals = booking_goals_example
+box_name = os.getenv("box_name")
+box_id = os.getenv("box_id")
+days_in_advance = os.getenv("days_in_advance")
 
 
 def get_booking_goal_time(day: datetime, booking_goals):
@@ -47,7 +46,8 @@ def main():
     class_id = get_class_to_book(classes, target_time, target_name)
     client.book_class(target_day, class_id)
     currentTime_b = datetime.now().strftime("%S")
-    print("Diferencia:",str(int(currentTime_a)-int(currentTime_b))+" segundos")
+    print("Diferencia:", str(int(currentTime_a) - int(currentTime_b)) + " segundos")
+
 
 main()
 
