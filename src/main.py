@@ -1,4 +1,4 @@
-import os
+import argparse, json
 from datetime import datetime, timedelta
 
 
@@ -25,7 +25,7 @@ def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
     return _class[0]["id"]
 
 
-def main():
+def main(email, password, booking_goals, box_name, box_id, days_in_advance):
     currentTime_a = datetime.now().strftime("%S")
     target_day = datetime.today() + timedelta(days=days_in_advance)
     client = AimHarderClient(
@@ -41,24 +41,24 @@ def main():
 
 main()
 
-# if __name__ == "__main__":
-#     """
-#     python src/main.py
-#      --email your.email@mail.com
-#      --password 1234
-#      --box-name lahuellacrossfit
-#      --box-id 3984
-#      --booking-goal '{"0":{"time": "1815", "name": "Provenza"}}'
-#     """
-#     parser = argparse.ArgumentParser()
-#     parser.add_argument("--email", required=True, type=str)
-#     parser.add_argument("--password", required=True, type=str)
-#     parser.add_argument("--box-name", required=True, type=str)
-#     parser.add_argument("--box-id", required=True, type=int)
-#     parser.add_argument("--booking-goals", required=True, type=json.loads)
-#     parser.add_argument("--days-in-advance", required=False, type=int, default=3)
+if __name__ == "__main__":
+    """
+    python src/main.py
+     --email your.email@mail.com
+     --password 1234
+     --box-name lahuellacrossfit
+     --box-id 3984
+     --booking-goal '{"0":{"time": "1815", "name": "Provenza"}}'
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--email", required=True, type=str)
+    parser.add_argument("--password", required=True, type=str)
+    parser.add_argument("--box-name", required=True, type=str)
+    parser.add_argument("--box-id", required=True, type=int)
+    parser.add_argument("--booking-goals", required=True, type=json.loads)
+    parser.add_argument("--days-in-advance", required=False, type=int, default=3)
 
-#     args = parser.parse_args()
-#     print('A')
-#     input = {key: value for key, value in args.__dict__.items() if value != ""}
-#     main(**input)
+    args = parser.parse_args()
+    print('A')
+    input = {key: value for key, value in args.__dict__.items() if value != ""}
+    main(**input)
