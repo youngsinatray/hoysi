@@ -1,18 +1,28 @@
-import argparse
+import argparse, os
 import json
 from datetime import datetime, timedelta
 
 
 from client import AimHarderClient
 from exceptions import NoBookingGoal
+from dotenv import load_dotenv
+
+load_dotenv()
+booking_goals_example = os.getenv('booking_goals_example')
+email= os.getenv('email')
+password= os.getenv('password')
+booking_goals=booking_goals_example
+box_name= os.getenv('box_name')
+box_id= os.getenv('box_id')
+days_in_advance= os.getenv('days_in_advance')
 
 
 def get_booking_goal_time(day: datetime, booking_goals):
     """Get the booking goal that satisfies the given day of the week"""
     try:
         return (
-            booking_goals[str(day.weekday())]["time"],
-            booking_goals[str(day.weekday())]["name"],
+            booking_goals[0][6]["time"],
+            booking_goals[0][6]["name"],
         )
     except KeyError:  # did not found a matching booking goal
         raise NoBookingGoal
@@ -26,7 +36,8 @@ def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
     return _class[0]["id"]
 
 
-def main(email, password, booking_goals, box_name, box_id, days_in_advance):
+def main():
+    currentTime_a = datetime.now().strftime("%S")
     target_day = datetime.today() + timedelta(days=days_in_advance)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
@@ -35,24 +46,29 @@ def main(email, password, booking_goals, box_name, box_id, days_in_advance):
     classes = client.get_classes(target_day)
     class_id = get_class_to_book(classes, target_time, target_name)
     client.book_class(target_day, class_id)
+    currentTime_b = datetime.now().strftime("%S")
+    print("Diferencia:",str(int(currentTime_a)-int(currentTime_b))+" segundos")
 
+main()
 
-if __name__ == "__main__":
-    """
-    python src/main.py
-     --email your.email@mail.com
-     --password 1234
-     --box-name lahuellacrossfit
-     --box-id 3984
-     --booking-goal '{"0":{"time": "1815", "name": "Provenza"}}'
-    """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--email", required=True, type=str)
-    parser.add_argument("--password", required=True, type=str)
-    parser.add_argument("--booking-goals", required=True, type=json.loads)
-    parser.add_argument("--box-name", required=True, type=str)
-    parser.add_argument("--box-id", required=True, type=int)
-    parser.add_argument("--days-in-advance", required=True, type=int, default=3)
-    args = parser.parse_args()
-    input = {key: value for key, value in args.__dict__.items() if value != ""}
-    main(**input)
+# if __name__ == "__main__":
+#     """
+#     python src/main.py
+#      --email your.email@mail.com
+#      --password 1234
+#      --box-name lahuellacrossfit
+#      --box-id 3984
+#      --booking-goal '{"0":{"time": "1815", "name": "Provenza"}}'
+#     """
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("--email", required=True, type=str)
+#     parser.add_argument("--password", required=True, type=str)
+#     parser.add_argument("--box-name", required=True, type=str)
+#     parser.add_argument("--box-id", required=True, type=int)
+#     parser.add_argument("--booking-goals", required=True, type=json.loads)
+#     parser.add_argument("--days-in-advance", required=False, type=int, default=3)
+
+#     args = parser.parse_args()
+#     print('A')
+#     input = {key: value for key, value in args.__dict__.items() if value != ""}
+#     main(**input)
