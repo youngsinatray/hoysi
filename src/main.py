@@ -11,12 +11,11 @@ def get_booking_goal_time(day: datetime, booking_goals):
     """Get the booking goal that satisfies the given day of the week"""
     try:
         return (
-            booking_goals[str(day.weekday())]["time"],
-            booking_goals[str(day.weekday())]["name"],
+            booking_goals[0][0]["time"],
+            booking_goals[0][0]["name"],
         )
     except KeyError as e:  # did not found a matching booking goal
-
-        raise Exception("Error en booking goals", str(e))
+        raise Exception("Error en booking goals", str(e), booking_goals)
 
 
 def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
