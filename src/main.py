@@ -22,7 +22,7 @@ def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
     classes = list(filter(lambda _class: target_time in _class["timeid"], classes))
     _class = list(filter(lambda _class: class_name in _class["className"], classes))
     if len(_class) == 0:
-        raise NoBookingGoal
+        raise Exception("No Booking Goal",classes,target_time,class_name)
     return _class[0]["id"]
 
 

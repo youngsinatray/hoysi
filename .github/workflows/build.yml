@@ -15,6 +15,6 @@ jobs:
     - name: Lint and unit tests
       run: make docker/tests
     - name: Run (OPEN-BOX)
-      run: docker run --name=fitbot -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e booking-goals={'\"0\":{\"time\":\"1830\"\,\"name\":\"OPEN\ BOX\"}'} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
+      run: docker run --name=fitbot -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e booking-goals={'\"0\":{\"time\":\"1830_60\"\,\"name\":\"OPEN\ BOX\"}'} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
     - name: Print output
       run: docker logs fitbot
