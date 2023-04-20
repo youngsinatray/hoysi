@@ -2,6 +2,7 @@ from abc import ABC
 
 MESSAGE_BOOKING_FAILED_NO_CREDIT = "No credit available"
 MESSAGE_BOOKING_FAILED_UNKNOWN = "Unknown error"
+MESSAGE_BOOKING_FAILED_FULL_BOOKINGS = "No puedes tener más de 6 reservas simultáneas"
 
 
 class ErrorResponse(ABC, Exception):

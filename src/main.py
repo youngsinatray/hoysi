@@ -10,10 +10,9 @@ from exceptions import NoBookingGoal
 def get_booking_goal_time(day: datetime, booking_goals: json):
     """Get the booking goal that satisfies the given day of the week"""
     try:
-        print(str(day.weekday()))
         return (
             booking_goals[str(day.weekday())]["time"],
-            booking_goals["0"]["name"],
+            booking_goals[str(day.weekday())]["name"],
         )
     except KeyError as e:  # did not found a matching booking goal
         raise Exception("Error en booking goals", str(e), booking_goals)
@@ -29,57 +28,59 @@ def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
 
 def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfit", box_id="3984", days_in_advance="2", booking_goals='{"0":{"time": "1815", "name": "Provenza"}}'):
     print("MAIN: ")
-    booking_goals = {
+    booking_goals1 = {
         0: {
             "time": "1830_60",
-            "name": "Open Box"
-        },
-        0: {
-            "time": "1930_60",
             "name": "Open Box"
         },
         1: {
             "time": "1830_60",
             "name": "Open Box"
         },
-        1: {
-            "time": "1930_60",
-            "name": "Open Box"
-        },
         2: {
             "time": "1830_60",
-            "name": "Open Box"
-        },
-        2: {
-            "time": "1930_60",
             "name": "Open Box"
         },
         3: {
             "time": "1830_60",
             "name": "Open Box"
         },
-        3: {
-            "time": "1930_60",
-            "name": "Open Box"
-        },
         4: {
             "time": "1830_60",
-            "name": "Open Box"
-        },
-        4: {
-            "time": "1930_60",
             "name": "Open Box"
         },
         5: {
             "time": "1230_60",
-            "name": "Open Box"
-        },
-        5: {
-            "time": "1330_60",
             "name": "Open Box"
         },
         6: {
             "time": "1230_60",
+            "name": "Open Box"
+        },
+    }
+    booking_goals2 = {
+        0: {
+            "time": "1930_60",
+            "name": "Open Box"
+        },
+        1: {
+            "time": "1930_60",
+            "name": "Open Box"
+        },
+        2: {
+            "time": "1930_60",
+            "name": "Open Box"
+        },
+        3: {
+            "time": "1930_60",
+            "name": "Open Box"
+        },
+        4: {
+            "time": "1930_60",
+            "name": "Open Box"
+        },
+        5: {
+            "time": "1330_60",
             "name": "Open Box"
         },
         6: {
@@ -88,18 +89,23 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
         },
         
     }
-    booking_goals_json = json.dumps(booking_goals)
-    booking_goals_json = json.loads(booking_goals_json)
-    print("Booking goals:", booking_goals_json)
+    booking_goals_json1 = json.dumps(booking_goals1)
+    booking_goals_json1 = json.loads(booking_goals_json1)
+    booking_goals_json2 = json.dumps(booking_goals2)
+    booking_goals_json2 = json.loads(booking_goals_json2)
+    # print("Booking goals:", booking_goals_json1)
     currentTime_a = datetime.now().strftime("%S")
     target_day = datetime.today() + timedelta(days=days_in_advance)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
     )
-    target_time, target_name = get_booking_goal_time(target_day, booking_goals_json)
+    target_time1, target_name1 = get_booking_goal_time(target_day, booking_goals_json1)
+    target_time2, target_name2 = get_booking_goal_time(target_day, booking_goals_json2)
     classes = client.get_classes(target_day)
-    class_id = get_class_to_book(classes, target_time, target_name)
-    client.book_class(target_day, class_id)
+    class_id1 = get_class_to_book(classes, target_time1, target_name1)
+    class_id2 = get_class_to_book(classes, target_time2, target_name2)
+    client.book_class(target_day, class_id1)
+    client.book_class(target_day, class_id2)
     currentTime_b = datetime.now().strftime("%S")
     print("Diferencia:", str(int(currentTime_a) - int(currentTime_b)) + " segundos")
 
