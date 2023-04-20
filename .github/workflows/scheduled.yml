@@ -13,6 +13,8 @@ jobs:
       # - name: Build docker image
       #   run: make docker/build
       - name: Date
+        run: docker container ls
+      - name: Date
         run: date
       - name: Run (OPEN BOX)
         run: docker run -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e booking-goals={'\"0\":{\"time\":\"1830\"\,\"name\":\"OPEN\ BOX\"}'} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 pablobuenaposada/fitbot
