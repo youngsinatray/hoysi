@@ -14,3 +14,5 @@ jobs:
       run: make docker/build
     - name: Lint and unit tests
       run: make docker/tests
+    - name: Check run
+      run: make docker/check
