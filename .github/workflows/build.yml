@@ -14,5 +14,7 @@ jobs:
       run: make docker/build
     - name: Lint and unit tests
       run: make docker/tests
-    - name: Check run
-      run: make docker/check
+    - name: Run (OPEN BOX)
+      run: docker run -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e booking-goals={'\"0\":{\"time\":\"1830\"\,\"name\":\"OPEN\ BOX\"}'} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 pablobuenaposada/fitbot
+    - name: Print output
+      run: docker logs fitbot
