@@ -13,8 +13,9 @@ format/check:
 	venv/bin/flake8 src
 
 run: venv
-	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --booking-goals=$(booking-goals) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance)
-
+	echo $(booking-goals)
+	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --booking-goals=$(booking-goals) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance) > output.txt
+	cat output.txt
 tests: venv format/check
 	venv/bin/pip install -r requirements-tests.txt
 	PYTHONPATH=src venv/bin/pytest src/tests
