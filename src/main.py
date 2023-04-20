@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 
 from client import AimHarderClient
-from exceptions import NoBookingGoal
+# from exceptions import NoBookingGoal
 
 
 def get_booking_goal_time(day: datetime, booking_goals: json):
