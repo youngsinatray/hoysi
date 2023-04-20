@@ -28,6 +28,8 @@ def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
 
 def main(email, password, booking_goals, box_name, box_id, days_in_advance):
     print("MAIN: ")
+    print(booking_goals)
+    print("Booking goals:",booking_goals[0])
     currentTime_a = datetime.now().strftime("%S")
     target_day = datetime.today() + timedelta(days=days_in_advance)
     client = AimHarderClient(
