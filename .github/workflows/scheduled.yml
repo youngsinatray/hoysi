@@ -2,7 +2,7 @@ name: Ejecución periódica
 
 on:
   schedule:
-    - cron: "57 11 * * *"
+    - cron: "55 15 * * *"
 
 jobs:
   run:
@@ -10,15 +10,15 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
-      # - name: Build docker image
-      #   run: make docker/build
-      - name: docker ps
-        run: docker ps
       - name: Date
         run: date
-      - name: Run (OPEN BOX)
+      - name: Set timezone
+        run: sudo timedatectl set-timezone "Europe/Madrid"
+      - name: Date
+        run: date
+      - name: Run (OPEN-BOX)
         run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
-      - name: Print output
-        run: docker logs fitbot
+      # - name: Print output
+      #   run: docker logs fitbot
       # - name: Run fitbot (WOD)
       #   run: docker run -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e booking-goals={'\"0\":{\"time\":\"1900_60\"\,\"name\":\"OPEN\ BOX\"}\,\"1\":{\"time\":\"1700_60\"\,\"name\":\"OPEN\ BOX\"},\"2\":{\"time\":\"1900_60\"\,\"name\":\"OPEN\ BOX\"},\"3\":{\"time\":\"1900_60\"\,\"name\":\"OPEN\ BOX\"},\"4\":{\"time\":\"1900_60\"\,\"name\":\"OPEN\ BOX\"}'} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=4 pablobuenaposada/fitbot

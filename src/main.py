@@ -15,13 +15,13 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     :param hour: hour in 24-hour format (0-23)
     :param minute: minute (0-59)
     """
-    target_time = datetime.now().replace(hour=hour, minute=minute+3, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=hour, minute=minute, second=0, microsecond=0)
     # target_time = datetime.now() + timedelta(minutes=1)
     # if target_time < datetime.now():
     #     target_time += timedelta(days=1)
 
-    if (int(target_time.strftime("%M")) - int(datetime.now().strftime("%M"))) > 5:
-        raise Exception("Más de 5 minutos de diferencia", target_time.strftime("%H:%M:%S"))
+    if (int(target_time.strftime("%M")) - int(datetime.now().strftime("%M"))) > 10:
+        raise Exception("Más de 10 minutos de diferencia", target_time.strftime("%H:%M:%S"))
     
     wait_time = (target_time - datetime.now()).total_seconds()
     if wait_time < 0:
@@ -137,7 +137,7 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1)
     class_id2 = get_class_to_book(classes, target_time2, target_name2)
-    run_at_specific_time(15, 20, client, target_day, class_id1, class_id2)
+    run_at_specific_time(16, 00, client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)
     currentTime_b = datetime.now()

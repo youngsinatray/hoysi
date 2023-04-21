@@ -13,7 +13,6 @@ format/check:
 	venv/bin/flake8 src
 
 run: venv
-	
 	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance)
 
 tests: venv format/check
