@@ -1,0 +1,19 @@
+name: Set Time
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
+
+jobs:
+  run-tryout:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check Date
+      run: date
+    - name: Run (OPEN-BOX)
+      run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 rodrigocalvorubio/hoysi:latest
+    - name: Print output
+      run: docker logs hoysi
