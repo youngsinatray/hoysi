@@ -11,8 +11,8 @@ def get_booking_goal_time(day: datetime, booking_goals: json):
     """Get the booking goal that satisfies the given day of the week"""
     try:
         return (
-            booking_goals["6"]["time"],
-            booking_goals["6"]["name"],
+            booking_goals[str(day.weekday())]["time"],
+            booking_goals[str(day.weekday())]["name"],
         )
     except KeyError as e:  # did not found a matching booking goal
         raise Exception("Error en booking goals", str(e), booking_goals)
