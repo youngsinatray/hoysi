@@ -15,6 +15,8 @@ jobs:
     - name: Lint and unit tests
       run: make docker/tests
   set-date:
+    runs-on: ubuntu-latest
+    steps:
     - name: Date
       run: date
     - name: Set timezone
@@ -22,6 +24,8 @@ jobs:
     - name: Date
       run: date
   run tryout:
+    runs-on: ubuntu-latest
+    steps:
     - name: Run (OPEN-BOX)
       run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
     - name: Print output
