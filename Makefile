@@ -13,7 +13,7 @@ format/check:
 	venv/bin/flake8 src
 
 run: venv
-	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --booking-goals=$(booking-goals) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance)
+	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance)
 
 tests: venv format/check
 	venv/bin/pip install -r requirements-tests.txt
@@ -26,5 +26,5 @@ docker/tests:
 	docker run fitbot /bin/sh -c 'make tests'
 
 docker/check:
-	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --booking-goals=$(booking-goals) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance) > output.txt
+	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance) > output.txt
 	cat output.txt
