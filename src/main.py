@@ -118,7 +118,7 @@ if __name__ == "__main__":
      --email your.email@mail.com
      --password 1234
      --box-name lahuellacrossfit
-     --box-id 3984
+     --box-id 3985
      --booking-goals '{"0":{"time": "1815", "name": "Provenza"}}'
     """
     parser = argparse.ArgumentParser()
