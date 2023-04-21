@@ -13,7 +13,7 @@ format/check:
 	venv/bin/flake8 src
 
 run: venv
-	date --set="$(TZ=Europe/Madrid)$(date +'%m%d%H%M%Y.%S')"
+	sudo date --set="$(TZ=Europe/Madrid)$(date +'%m%d%H%M%Y.%S')"
 	PYTHONPATH=src venv/bin/python src/main.py --email=$(email) --password=$(password) --box-name=$(box-name) --box-id=$(box-id) --days-in-advance=$(days-in-advance)
 
 tests: venv format/check
