@@ -1,10 +1,36 @@
 import argparse
 import json
+import time
 from datetime import datetime, timedelta
 
 
 from client import AimHarderClient
 # from exceptions import NoBookingGoal
+
+
+def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str, class_id1, class_id2):
+    """
+    Runs the function at a specific time.
+
+    :param hour: hour in 24-hour format (0-23)
+    :param minute: minute (0-59)
+    """
+    target_time = datetime.now().replace(hour=hour, minute=minute, second=0, microsecond=0)
+    if target_time < datetime.now():
+        target_time += timedelta(days=1)
+
+    wait_time = (target_time - datetime.now()).total_seconds()
+    print(f"Waiting for {wait_time} seconds...")
+    time.sleep(wait_time)
+
+    # Call your function here
+    print("PreBook",datetime.now().strftime("%H:%M:%S"))
+    client.book_class(target_day, class_id1)
+    print("After 1st book",datetime.now().strftime("%H:%M:%S"))
+    client.book_class(target_day, class_id2)
+    print("PostBook",datetime.now().strftime("%H:%M:%S"))
+
+
 
 
 def get_booking_goal_time(day: datetime, booking_goals: json):
@@ -96,7 +122,7 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
     booking_goals_json2 = json.dumps(booking_goals2)
     booking_goals_json2 = json.loads(booking_goals_json2)
     # print("Booking goals:", booking_goals_json1)
-    currentTime_a = datetime.now().strftime("%S")
+    currentTime_a = datetime.now()
     target_day = datetime.today() + timedelta(days=days_in_advance)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
@@ -106,10 +132,16 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1)
     class_id2 = get_class_to_book(classes, target_time2, target_name2)
-    client.book_class(target_day, class_id1)
-    client.book_class(target_day, class_id2)
-    currentTime_b = datetime.now().strftime("%S")
-    print("Diferencia:", str(int(currentTime_a) - int(currentTime_b)) + " segundos")
+    run_at_specific_time(11, 20, client, target_day, class_id1, class_id2)
+    # client.book_class(target_day, class_id1)
+    # client.book_class(target_day, class_id2)
+    currentTime_b = datetime.now()
+    print(
+            "Diferencia desde el principio del main:",
+            str(int(currentTime_a.strftime("%S")) - int(currentTime_b.strftime("%S"))) + " segundos",
+            "\n","Inicio del main: " + str(currentTime_a.strftime("%H:%M:%S")),
+            "\n","Fin del main: " + str(currentTime_b.strftime("%H:%M:%S"))
+        )
 
 
 if __name__ == "__main__":
