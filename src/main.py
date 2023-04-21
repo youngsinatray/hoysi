@@ -130,7 +130,7 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1)
     class_id2 = get_class_to_book(classes, target_time2, target_name2)
-    run_at_specific_time(12, 20, client, target_day, class_id1, class_id2)
+    run_at_specific_time(12, 28, client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)
     currentTime_b = datetime.now()
