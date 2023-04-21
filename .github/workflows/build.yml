@@ -24,8 +24,6 @@ jobs:
       run: sudo timedatectl set-timezone "Europe/Madrid"
     - name: Date
       run: date
-    - name: Set docker-date
-      run: 
     - name: Run (OPEN-BOX)
       run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e days-in-advance=2 ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
     - name: Print output
