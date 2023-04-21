@@ -23,7 +23,7 @@ jobs:
       run: sudo timedatectl set-timezone "Europe/Madrid"
     - name: Date
       run: date
-  run tryout:
+  run-tryout:
     runs-on: ubuntu-latest
     steps:
     - name: Run (OPEN-BOX)
