@@ -17,6 +17,7 @@ from exceptions import (
     MESSAGE_BOOKING_FAILED_NO_CREDIT,
     MESSAGE_BOOKING_FAILED_UNKNOWN,
     MESSAGE_BOOKING_FAILED_FULL_BOOKINGS,
+    MESSAGE_BOOKING_FAILED_ALREADY_BOOKED,
 )
 
 
@@ -78,5 +79,5 @@ class AimHarderClient:
             if response["errorMssg"] == "No puedes tener más de 6 reservas simultáneas":
                 raise BookingFailed(MESSAGE_BOOKING_FAILED_FULL_BOOKINGS)
             if response["errorMssgLang"] == "NOPUEDESRESERVAMISMAHORA":
-                print(response["errorMssg"])
+                raise BookingFailed(MESSAGE_BOOKING_FAILED_ALREADY_BOOKED)
         raise BookingFailed(MESSAGE_BOOKING_FAILED_UNKNOWN)

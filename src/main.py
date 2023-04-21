@@ -11,22 +11,24 @@ def get_booking_goal_time(day: datetime, booking_goals: json):
     """Get the booking goal that satisfies the given day of the week"""
     try:
         return (
-            booking_goals[str(day.weekday())]["time"],
-            booking_goals[str(day.weekday())]["name"],
+            booking_goals["6"]["time"],
+            booking_goals["6"]["name"],
         )
     except KeyError as e:  # did not found a matching booking goal
         raise Exception("Error en booking goals", str(e), booking_goals)
 
 
 def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
-    classes = list(filter(lambda _class: target_time in _class["timeid"], classes))
-    _class = list(filter(lambda _class: class_name in _class["className"], classes))
+    _classes = list(filter(lambda _class: target_time in _class["timeid"], classes))
+    if len(_classes) == 0:
+        raise Exception("No hay clases a las "+str(target_time)," Las clases que hay son: ",classes)
+    _class = list(filter(lambda _class: class_name in _class["className"], _classes))
     if len(_class) == 0:
-        raise Exception("No Booking Goal",classes,target_time,class_name,classes)
+        raise Exception("No hay clases de "+str(class_name)+" a las "+str(target_time)," Las clases que hay son: ",_classes)
     return _class[0]["id"]
 
 
-def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfit", box_id="3984", days_in_advance="2", booking_goals='{"0":{"time": "1815", "name": "Provenza"}}'):
+def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfit", box_id="3984", days_in_advance="2"):
     print("MAIN: ")
     booking_goals1 = {
         0: {
@@ -50,11 +52,11 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
             "name": "Open Box"
         },
         5: {
-            "time": "1230_60",
+            "time": "1200_60",
             "name": "Open Box"
         },
         6: {
-            "time": "1230_60",
+            "time": "1200_60",
             "name": "Open Box"
         },
     }
@@ -80,11 +82,11 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
             "name": "Open Box"
         },
         5: {
-            "time": "1330_60",
+            "time": "1300_60",
             "name": "Open Box"
         },
         6: {
-            "time": "1330_60",
+            "time": "1300_60",
             "name": "Open Box"
         },
         
@@ -124,7 +126,7 @@ if __name__ == "__main__":
     parser.add_argument("--password", required=True, type=str)
     parser.add_argument("--box-name", required=True, type=str)
     parser.add_argument("--box-id", required=True, type=int)
-    parser.add_argument("--booking-goals", required=True, type=str)
+    # parser.add_argument("--booking-goals", required=False, type=str)
     parser.add_argument("--days-in-advance", required=False, type=int, default=3)
 
     args = parser.parse_args()
