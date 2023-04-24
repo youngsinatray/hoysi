@@ -16,8 +16,6 @@ from exceptions import (
     TooManyWrongAttempts,
     MESSAGE_BOOKING_FAILED_NO_CREDIT,
     MESSAGE_BOOKING_FAILED_UNKNOWN,
-    MESSAGE_BOOKING_FAILED_FULL_BOOKINGS,
-    MESSAGE_BOOKING_FAILED_ALREADY_BOOKED,
 )
 
 
@@ -68,21 +66,14 @@ class AimHarderClient:
                 "familyId": "",
             },
         )
-        try:
-            if response.status_code == HTTPStatus.OK:
-                response = response.json()
-                print("Respuesta:", response)
-                if "bookState" in response and response["bookState"] == -2:
-                    raise BookingFailed(MESSAGE_BOOKING_FAILED_NO_CREDIT)
-                if "errorMssg" not in response and "errorMssgLang" not in response:
-                    # booking went fine
-                    return
-                if response["errorMssg"] == "No puedes tener más de 6 reservas simultáneas":
-                    raise BookingFailed(MESSAGE_BOOKING_FAILED_FULL_BOOKINGS)
-                if response["errorMssgLang"] == "NOPUEDESRESERVAMISMAHORA":
-                    raise BookingFailed(MESSAGE_BOOKING_FAILED_ALREADY_BOOKED)
-            raise BookingFailed(MESSAGE_BOOKING_FAILED_UNKNOWN)
-        except Exception as e:
-            print("Exception: ",str(e))
-            pass
-
+        if response.status_code == HTTPStatus.OK:
+            response = response.json()
+            print("Respuesta:", response)
+            if "bookState" in response and response["bookState"] == -2:
+                raise BookingFailed(MESSAGE_BOOKING_FAILED_NO_CREDIT)
+            if "errorMssg" not in response and "errorMssgLang" not in response:
+                # booking went fine
+                return
+            if "errorMssg" == "No puedes tener más de 6 reservas simultáneas":
+                print("Todavía no")
+        raise BookingFailed(MESSAGE_BOOKING_FAILED_UNKNOWN)
