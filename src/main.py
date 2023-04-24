@@ -10,7 +10,7 @@ from client import AimHarderClient
 
 def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str, class_id1, class_id2):
     """
-    Runs the function at a specific time.
+    Runs the function at a specific time
 
     :param hour: hour in 24-hour format (0-23)
     :param minute: minute (0-59)
