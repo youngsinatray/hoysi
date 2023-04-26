@@ -37,11 +37,11 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     time.sleep(wait_time)
 
     # Call your function here
-    print("PreBook",datetime.now().strftime("%H:%M:%S"))
+    print("PreBook for:",target_day," done at ",datetime.now().strftime("%H:%M:%S"))
     client.book_class(target_day, class_id1)
-    print("After 1st book",datetime.now().strftime("%H:%M:%S"))
+    print("After 1st book",target_day," done at ",datetime.now().strftime("%H:%M:%S"))
     client.book_class(target_day, class_id2)
-    print("PostBook",datetime.now().strftime("%H:%M:%S"))
+    print("PostBook",target_day," done at ",datetime.now().strftime("%H:%M:%S"))
 
 
 def get_booking_goal_time(day: datetime, booking_goals: json):
