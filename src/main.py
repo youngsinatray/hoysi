@@ -15,7 +15,12 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     :param hour: hour in 24-hour format (0-23)
     :param minute: minute (0-59)
     """
-    target_time = datetime.now().replace(hour=hour, minute=minute, second=0, microsecond=0)
+
+    now = datetime.now()
+    target_time = datetime.now().replace(hour=now.hour, minute=now.minute+1, second=0, microsecond=0)
+
+    # target_time = datetime.now().replace(hour=hour, minute=minute, second=0, microsecond=0)
+    
     # raise Exception("Checking date: ", hour,"hour + 2:", hour+2, minute, "\nTarget time: ",target_time)
     # target_time = datetime.now() + timedelta(minutes=1)
     # if target_time < datetime.now():
@@ -24,7 +29,6 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     if (int(target_time.strftime("%M")) - int(datetime.now().strftime("%M"))) > 10:
         raise Exception("Más de 10 minutos de diferencia", target_time.strftime("%H:%M:%S"))
     
-    now = datetime.now()
     wait_time = (target_time - now).total_seconds()
     if wait_time < 0:
         raise Exception("Esa hora ya ha pasado", wait_time)
