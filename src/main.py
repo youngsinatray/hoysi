@@ -26,8 +26,8 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     # if target_time < datetime.now():
     #     target_time += timedelta(days=1)
 
-    if (int(target_time.strftime("%M")) - int(datetime.now().strftime("%M"))) > 10:
-        raise Exception("Más de 10 minutos de diferencia", target_time.strftime("%H:%M:%S"))
+    if (int(target_time.strftime("%M")) - int(datetime.now().strftime("%M"))) > 60:
+        raise Exception("Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S"))
     
     wait_time = (target_time - now).total_seconds()
     if wait_time < 0:
