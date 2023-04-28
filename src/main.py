@@ -19,7 +19,7 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     now = datetime.now()
     # target_time = datetime.now().replace(hour=now.hour, minute=now.minute+1, second=0, microsecond=0)
 
-    target_time = datetime.now().replace(hour=hour, minute=minute, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=24, minute=minute, second=0, microsecond=0)
     
     # raise Exception("Checking date: ", hour,"hour + 2:", hour+2, minute, "\nTarget time: ",target_time)
     # target_time = datetime.now() + timedelta(minutes=1)
