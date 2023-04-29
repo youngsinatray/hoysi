@@ -8,7 +8,7 @@ from client import AimHarderClient
 # from exceptions import NoBookingGoal
 
 
-def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str, class_id1, class_id2):
+def run_at_specific_time(client: AimHarderClient, target_day: str, class_id1, class_id2):
     """
     Runs the function at a specific time.
 
@@ -19,13 +19,8 @@ def run_at_specific_time(hour, minute, client: AimHarderClient, target_day: str,
     now = datetime.now()
     # target_time = datetime.now().replace(hour=now.hour, minute=now.minute+1, second=0, microsecond=0)
 
-    target_time = datetime.now().replace(hour=24, minute=minute, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=23, minute=0, second=0, microsecond=0)
     
-    # raise Exception("Checking date: ", hour,"hour + 2:", hour+2, minute, "\nTarget time: ",target_time)
-    # target_time = datetime.now() + timedelta(minutes=1)
-    # if target_time < datetime.now():
-    #     target_time += timedelta(days=1)
-
     if (int(target_time.strftime("%M")) - int(datetime.now().strftime("%M"))) > 60:
         raise Exception("Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S"))
     
@@ -73,7 +68,7 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
             "name": "Open Box"
         },
         1: {
-            "time": "1830_60",
+            "time": "1200_60",
             "name": "Open Box"
         },
         2: {
@@ -103,7 +98,7 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
             "name": "Open Box"
         },
         1: {
-            "time": "1930_60",
+            "time": "1300_60",
             "name": "Open Box"
         },
         2: {
@@ -143,7 +138,7 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1)
     class_id2 = get_class_to_book(classes, target_time2, target_name2)
-    run_at_specific_time(24, 00, client, target_day, class_id1, class_id2)
+    run_at_specific_time(client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)
     currentTime_b = datetime.now()
