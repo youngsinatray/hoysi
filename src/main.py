@@ -50,10 +50,10 @@ def get_booking_goal_time(day: datetime, booking_goals: json):
         raise Exception("Error en booking goals", str(e), booking_goals)
 
 
-def get_class_to_book(classes: list[dict], target_time: str, class_name: str):
+def get_class_to_book(classes: list[dict], target_time: str, class_name: str, target_day):
     _classes = list(filter(lambda _class: target_time in _class["timeid"], classes))
     if len(_classes) == 0:
-        raise Exception("No hay clases a las "+str(target_time)," Las clases que hay son: ",classes)
+        raise Exception("No hay clases a las "+str(target_time) + "el día " + str(target_day)," Las clases que hay son: ",classes)
     _class = list(filter(lambda _class: class_name in _class["className"], _classes))
     if len(_class) == 0:
         raise Exception("No hay clases de "+str(class_name)+" a las "+str(target_time)," Las clases que hay son: ",_classes)
@@ -136,8 +136,8 @@ def main(email="your.email@mail.com", password="1234", box_name="lahuellacrossfi
     target_time1, target_name1 = get_booking_goal_time(target_day, booking_goals_json1)
     target_time2, target_name2 = get_booking_goal_time(target_day, booking_goals_json2)
     classes = client.get_classes(target_day)
-    class_id1 = get_class_to_book(classes, target_time1, target_name1)
-    class_id2 = get_class_to_book(classes, target_time2, target_name2)
+    class_id1 = get_class_to_book(classes, target_time1, target_name1, target_day)
+    class_id2 = get_class_to_book(classes, target_time2, target_name2, target_day)
     run_at_specific_time(client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)
