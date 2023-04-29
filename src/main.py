@@ -53,7 +53,7 @@ def get_booking_goal_time(day: datetime, booking_goals: json):
 def get_class_to_book(classes: list[dict], target_time: str, class_name: str, target_day):
     _classes = list(filter(lambda _class: target_time in _class["timeid"], classes))
     if len(_classes) == 0:
-        raise Exception("No hay clases a las "+str(target_time) + "el día " + str(target_day)," Las clases que hay son: ",classes)
+        raise Exception("No hay clases a las "+str(target_time) + " el día " + str(target_day)," Las clases que hay son: ",classes)
     _class = list(filter(lambda _class: class_name in _class["className"], _classes))
     if len(_class) == 0:
         raise Exception("No hay clases de "+str(class_name)+" a las "+str(target_time)," Las clases que hay son: ",_classes)
