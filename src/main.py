@@ -17,7 +17,7 @@ def run_at_specific_time(client: AimHarderClient, target_day: str, class_id1, cl
     """
 
     now = datetime.now()
-    target_time = datetime.now().replace(hour=23, minute=59, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=now.hour, minute=now.minute+1, second=0, microsecond=0)
     
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception("Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S"))
