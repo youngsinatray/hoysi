@@ -68,7 +68,7 @@ def main(email, password, box_name, box_id):
             "name": "Open Box"
         },
         1: {
-            "time": "1200_60",
+            "time": "1830_60",
             "name": "Open Box"
         },
         2: {
@@ -80,7 +80,7 @@ def main(email, password, box_name, box_id):
             "name": "Open Box"
         },
         4: {
-            "time": "1830_60",
+            "time": "1630_60",
             "name": "Open Box"
         },
         5: {
@@ -98,7 +98,7 @@ def main(email, password, box_name, box_id):
             "name": "Open Box"
         },
         1: {
-            "time": "1300_60",
+            "time": "1830_60",
             "name": "Open Box"
         },
         2: {
@@ -110,7 +110,7 @@ def main(email, password, box_name, box_id):
             "name": "Open Box"
         },
         4: {
-            "time": "1930_60",
+            "time": "1730_60",
             "name": "Open Box"
         },
         5: {
