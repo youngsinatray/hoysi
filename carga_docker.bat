@@ -1,5 +1,5 @@
-@REM git config --global user.name youngsinatray
-@REM git config --global user.email ohzhink@gmail.com
+git config --global user.name youngsinatray
+git config --global user.email ohzhink@gmail.com
 
 @REM Uploading docker image to DockerHub  
 docker build -t youngsinatra/hoysi . 
