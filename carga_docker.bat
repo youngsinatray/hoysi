@@ -7,5 +7,5 @@ docker push youngsinatra/hoysi:latest
 
 @REM Pushing to repo chages (the ones in .github/ are the ones that matters)
 git add .
-git commit -m "[~] Changed book time"
+git commit -m "[~] Changed 1 second btw petitions"
 git push

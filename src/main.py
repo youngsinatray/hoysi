@@ -5,10 +5,13 @@ from datetime import datetime, timedelta
 
 
 from client import AimHarderClient
+
 # from exceptions import NoBookingGoal
 
 
-def run_at_specific_time(client: AimHarderClient, target_day: str, class_id1, class_id2):
+def run_at_specific_time(
+    client: AimHarderClient, target_day: str, class_id1, class_id2
+):
     """
     Runs the function at a specific time.
 
@@ -18,13 +21,23 @@ def run_at_specific_time(client: AimHarderClient, target_day: str, class_id1, cl
 
     now = datetime.now()
     target_time = datetime.now().replace(hour=22, minute=0, second=0, microsecond=0)
-    
+
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
-        raise Exception("Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S"))
-    
-    wait_time = (target_time - now).total_seconds() + 63
-    print("Target time: " + str(target_time),"now: " + str(now),"Diferencia en segundos: "+ str(wait_time))
-    print("Restamos: 60 - " + str(now.minute),"= " +str(60 - now.minute), "Diferencia en horas: "+ str(wait_time / 3600))
+        raise Exception(
+            "Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S")
+        )
+
+    wait_time = (target_time - now).total_seconds() + 62
+    print(
+        "Target time: " + str(target_time),
+        "now: " + str(now),
+        "Diferencia en segundos: " + str(wait_time),
+    )
+    print(
+        "Restamos: 60 - " + str(now.minute),
+        "= " + str(60 - now.minute),
+        "Diferencia en horas: " + str(wait_time / 3600),
+    )
     if wait_time < 0:
         raise Exception("Esa hora ya ha pasado", wait_time)
 
@@ -32,11 +45,15 @@ def run_at_specific_time(client: AimHarderClient, target_day: str, class_id1, cl
     time.sleep(wait_time)
 
     # Call your function here
-    print("PreBook for:",target_day," done at ",datetime.now().strftime("%H:%M:%S"))
+    time.sleep(1)
+    print("PreBook for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
     client.book_class(target_day, class_id1)
-    print("After 1st book",target_day," done at ",datetime.now().strftime("%H:%M:%S"))
+    time.sleep(1)
+    print(
+        "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
+    )
     client.book_class(target_day, class_id2)
-    print("PostBook",target_day," done at ",datetime.now().strftime("%H:%M:%S"))
+    print("PostBook", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
 
 
 def get_booking_goal_time(day: datetime, booking_goals: json):
@@ -50,78 +67,45 @@ def get_booking_goal_time(day: datetime, booking_goals: json):
         raise Exception("Error en booking goals", str(e), booking_goals)
 
 
-def get_class_to_book(classes: list[dict], target_time: str, class_name: str, target_day):
+def get_class_to_book(
+    classes: list[dict], target_time: str, class_name: str, target_day
+):
     _classes = list(filter(lambda _class: target_time in _class["timeid"], classes))
     if len(_classes) == 0:
-        raise Exception("No hay clases a las "+str(target_time) + " el día " + str(target_day)," Las clases que hay son: ",classes)
+        raise Exception(
+            "No hay clases a las " + str(target_time) + " el día " + str(target_day),
+            " Las clases que hay son: ",
+            classes,
+        )
     _class = list(filter(lambda _class: class_name in _class["className"], _classes))
     if len(_class) == 0:
-        raise Exception("No hay clases de "+str(class_name)+" a las "+str(target_time)," Las clases que hay son: ",_classes)
+        raise Exception(
+            "No hay clases de " + str(class_name) + " a las " + str(target_time),
+            " Las clases que hay son: ",
+            _classes,
+        )
     return _class[0]["id"]
 
 
 def main(email, password, box_name, box_id):
     print("MAIN: ")
     booking_goals1 = {
-        0: {
-            "time": "1830_60",
-            "name": "Open Box"
-        },
-        1: {
-            "time": "1830_60",
-            "name": "Open Box"
-        },
-        2: {
-            "time": "1830_60",
-            "name": "Open Box"
-        },
-        3: {
-            "time": "1830_60",
-            "name": "Open Box"
-        },
-        4: {
-            "time": "1630_60",
-            "name": "Open Box"
-        },
-        5: {
-            "time": "1200_60",
-            "name": "Open Box"
-        },
-        6: {
-            "time": "1200_60",
-            "name": "Open Box"
-        },
+        0: {"time": "1830_60", "name": "Open Box"},
+        1: {"time": "1830_60", "name": "Open Box"},
+        2: {"time": "1830_60", "name": "Open Box"},
+        3: {"time": "1830_60", "name": "Open Box"},
+        4: {"time": "1630_60", "name": "Open Box"},
+        5: {"time": "1200_60", "name": "Open Box"},
+        6: {"time": "1200_60", "name": "Open Box"},
     }
     booking_goals2 = {
-        0: {
-            "time": "1930_60",
-            "name": "Open Box"
-        },
-        1: {
-            "time": "1830_60",
-            "name": "Open Box"
-        },
-        2: {
-            "time": "1930_60",
-            "name": "Open Box"
-        },
-        3: {
-            "time": "1930_60",
-            "name": "Open Box"
-        },
-        4: {
-            "time": "1730_60",
-            "name": "Open Box"
-        },
-        5: {
-            "time": "1300_60",
-            "name": "Open Box"
-        },
-        6: {
-            "time": "1300_60",
-            "name": "Open Box"
-        },
-        
+        0: {"time": "1930_60", "name": "Open Box"},
+        1: {"time": "1830_60", "name": "Open Box"},
+        2: {"time": "1930_60", "name": "Open Box"},
+        3: {"time": "1930_60", "name": "Open Box"},
+        4: {"time": "1730_60", "name": "Open Box"},
+        5: {"time": "1300_60", "name": "Open Box"},
+        6: {"time": "1300_60", "name": "Open Box"},
     }
     booking_goals_json1 = json.dumps(booking_goals1)
     booking_goals_json1 = json.loads(booking_goals_json1)
@@ -143,11 +127,14 @@ def main(email, password, box_name, box_id):
     # client.book_class(target_day, class_id2)
     currentTime_b = datetime.now()
     print(
-            "Diferencia desde el principio del main:",
-            str(int(currentTime_a.strftime("%S")) - int(currentTime_b.strftime("%S"))) + " segundos",
-            "\n","Inicio del main: " + str(currentTime_a.strftime("%H:%M:%S")),
-            "\n","Fin del main: " + str(currentTime_b.strftime("%H:%M:%S"))
-        )
+        "Diferencia desde el principio del main:",
+        str(int(currentTime_a.strftime("%S")) - int(currentTime_b.strftime("%S")))
+        + " segundos",
+        "\n",
+        "Inicio del main: " + str(currentTime_a.strftime("%H:%M:%S")),
+        "\n",
+        "Fin del main: " + str(currentTime_b.strftime("%H:%M:%S")),
+    )
 
 
 if __name__ == "__main__":

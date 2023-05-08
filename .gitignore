@@ -5,3 +5,4 @@ __pycache__
 .vscode/
 venv/
 nn.py
+carga_docker.bat
