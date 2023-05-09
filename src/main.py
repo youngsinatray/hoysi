@@ -27,7 +27,7 @@ def run_at_specific_time(
             "Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S")
         )
 
-    wait_time = (target_time - now).total_seconds() + 62
+    wait_time = (target_time - now).total_seconds() + 61
     print(
         "Target time: " + str(target_time),
         "now: " + str(now),
