@@ -27,7 +27,7 @@ def run_at_specific_time(
             "Más de 60 minutos de diferencia", target_time.strftime("%H:%M:%S")
         )
 
-    wait_time = (target_time - now).total_seconds() + 61
+    wait_time = (target_time - now).total_seconds()
     print(
         "Target time: " + str(target_time),
         "now: " + str(now),
@@ -45,13 +45,13 @@ def run_at_specific_time(
     time.sleep(wait_time)
 
     # Call your function here
-    time.sleep(1)
-    print("PreBook for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
-    client.book_class(target_day, class_id1)
-    time.sleep(1)
-    print(
-        "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
-    )
+    time.sleep(3)
+    print("PreBook for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"), " for ", class_id2)
+    # client.book_class(target_day, class_id1)
+    # time.sleep(1)
+    # print(
+    #     "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
+    # )
     client.book_class(target_day, class_id2)
     print("PostBook", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
 
@@ -122,6 +122,7 @@ def main(email, password, box_name, box_id):
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1, target_day)
     class_id2 = get_class_to_book(classes, target_time2, target_name2, target_day)
+    print(target_day,target_time1, target_time2)
     run_at_specific_time(client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)
