@@ -45,7 +45,7 @@ def run_at_specific_time(
     time.sleep(wait_time)
 
     # Call your function here
-    time.sleep(3)
+    time.sleep(4)
     print("PreBook for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"), " for ", class_id2)
     # client.book_class(target_day, class_id1)
     # time.sleep(1)
