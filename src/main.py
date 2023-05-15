@@ -48,15 +48,15 @@ def run_at_specific_time(
 
     # Call your function here
     print("Esperamos 5 segundos mas", datetime.now().strftime("%H:%M:%S"))
-    time.sleep(5)
+    time.sleep(3)
     
     print("PreBook for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"), " for ", class_id1)
     client.book_class(target_day, class_id1)
     # time.sleep(1)
-    # print(
-    #     "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
-    # )
-    # client.book_class(target_day, class_id2)
+    print(
+        "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
+    )
+    client.book_class(target_day, class_id2)
     print("PostBook", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
 
 
@@ -117,7 +117,7 @@ def main(email, password, box_name, box_id):
     booking_goals_json2 = json.loads(booking_goals_json2)
     # print("Booking goals:", booking_goals_json1)
     currentTime_a = datetime.now()
-    target_day = datetime.today() + timedelta(days=2)
+    target_day = datetime.today() + timedelta(days=3)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
     )
