@@ -1,6 +1,7 @@
 import argparse
 import json
 import time
+import random
 from datetime import datetime, timedelta
 
 
@@ -33,22 +34,17 @@ def run_at_specific_time(
         "now: " + str(now),
         "Diferencia en segundos: " + str(wait_time),
     )
-    print(
-        "Restamos: 60 - " + str(now.minute),
-        "= " + str(60 - now.minute),
-        "Diferencia en horas: " + str(wait_time / 3600),
-    )
+
     if wait_time < 0:
         raise Exception("Esa hora ya ha pasado", wait_time)
 
     print(f"Waiting for {wait_time} seconds...")
-    time.sleep(wait_time)
-
-    
+    wait_time = random.randint(0,999999) / 1000000 + int(wait_time)
+    time.sleep(wait_time)   
 
     # Call your function here
-    print("Esperamos 5 segundos mas", datetime.now().strftime("%H:%M:%S"))
-    time.sleep(3)
+    print("Esperamos 2 segundos mas", datetime.now().strftime("%H:%M:%S"))
+    time.sleep(2)
     
     print("PreBook for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"), " for ", class_id1)
     client.book_class(target_day, class_id1)
