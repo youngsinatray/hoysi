@@ -90,19 +90,19 @@ def get_class_to_book(
 def main(email, password, box_name, box_id):
     print("MAIN: ")
     booking_goals1 = {
-        0: {"time": "1830_60", "name": "Open Box"},
-        1: {"time": "1830_60", "name": "Open Box"},
-        2: {"time": "1830_60", "name": "Open Box"},
-        3: {"time": "1830_60", "name": "Open Box"},
+        0: {"time": "1730_60", "name": "Open Box"},
+        1: {"time": "1730_60", "name": "Open Box"},
+        2: {"time": "1730_60", "name": "Open Box"},
+        3: {"time": "1730_60", "name": "Open Box"},
         4: {"time": "1630_60", "name": "Open Box"},
         5: {"time": "1200_60", "name": "Open Box"},
         6: {"time": "1200_60", "name": "Open Box"},
     }
     booking_goals2 = {
-        0: {"time": "1930_60", "name": "Open Box"},
+        0: {"time": "1830_60", "name": "Open Box"},
         1: {"time": "1830_60", "name": "Open Box"},
-        2: {"time": "1930_60", "name": "Open Box"},
-        3: {"time": "1930_60", "name": "Open Box"},
+        2: {"time": "1830_60", "name": "Open Box"},
+        3: {"time": "1830_60", "name": "Open Box"},
         4: {"time": "1730_60", "name": "Open Box"},
         5: {"time": "1300_60", "name": "Open Box"},
         6: {"time": "1300_60", "name": "Open Box"},

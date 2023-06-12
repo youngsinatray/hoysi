@@ -9,3 +9,6 @@ docker push youngsinatra/hoysi:latest
 git add .
 git commit -m "[~] Changed days in advance, fixed error of booking already booked hours to 3 days diff"
 git push
+
+git config --global user.name youngsinatray
+git config --global user.email ohzhink@gmail.com
