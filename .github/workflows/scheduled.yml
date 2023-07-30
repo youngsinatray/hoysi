@@ -16,8 +16,8 @@ jobs:
       #   run: sudo timedatectl set-timezone "Europe/Madrid"
       # - name: Date
       #   run: date
-      - name: Run (OPEN-BOX)
-        run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
+      #- name: Run (OPEN-BOX)
+      #  run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
      # - name: Print output
       #  run: docker logs hoysi
       # - name: Run fitbot (WOD)
