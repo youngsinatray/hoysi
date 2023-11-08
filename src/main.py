@@ -21,7 +21,7 @@ def run_at_specific_time(
     """
 
     now = datetime.now()
-    target_time = datetime.now().replace(hour=22, minute=0, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=10, minute=00, second=0, microsecond=0)
 
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception(
@@ -40,7 +40,7 @@ def run_at_specific_time(
 
     print(f"Waiting for {wait_time} seconds...")
     wait_time = random.randint(0,999999) / 1000000 + int(wait_time)
-    time.sleep(wait_time)   
+    time.sleep(wait_time)
 
     # Call your function here
     print("Esperamos 2 segundos mas", datetime.now().strftime("%H:%M:%S"))
@@ -53,6 +53,8 @@ def run_at_specific_time(
         "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
     )
     client.book_class(target_day, class_id2)
+    print("Second book for:", target_day, " done at ", datetime.now().strftime("%H:%M:%S"), " for ", class_id2)
+
     print("PostBook", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
 
 
@@ -90,22 +92,22 @@ def get_class_to_book(
 def main(email, password, box_name, box_id):
     print("MAIN: ")
     booking_goals1 = {
-        0: {"time": "1730_60", "name": "Open Box"},
-        1: {"time": "1730_60", "name": "Open Box"},
-        2: {"time": "1730_60", "name": "Open Box"},
-        3: {"time": "1730_60", "name": "Open Box"},
-        4: {"time": "1630_60", "name": "Open Box"},
-        5: {"time": "1200_60", "name": "Open Box"},
-        6: {"time": "1200_60", "name": "Open Box"},
+        0: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
+        1: {"time": "1800_60", "name": "KAP Oly"},
+        2: {"time": "1800_60", "name": "KAP Functional BodyBuilding"}
+        3: {"time": "1830_60", "name": "KAP Oly"},
+        4: {"time": "1830_60", "name": "KAP Functional BodyBuilding"},
+        5: {"time": "1200_60", "name": "KAP Weekend"},
+        # 6: {"time": "1200_60", "name": "Open Box"},
     }
     booking_goals2 = {
-        0: {"time": "1830_60", "name": "Open Box"},
-        1: {"time": "1830_60", "name": "Open Box"},
-        2: {"time": "1830_60", "name": "Open Box"},
+        0: {"time": "1900_60", "name": "KAP Crossfit"},
+        1: {"time": "1900_60", "name": "KAP Crossfit"},
+        2: {"time": "1900_60", "name": "KAP Crossfit"}
         3: {"time": "1830_60", "name": "Open Box"},
         4: {"time": "1730_60", "name": "Open Box"},
-        5: {"time": "1300_60", "name": "Open Box"},
-        6: {"time": "1300_60", "name": "Open Box"},
+        5: {"time": "1300_60", "name": "KAP Weekend"},
+        # 6: {"time": "1300_60", "name": "Open Box"},
     }
     booking_goals_json1 = json.dumps(booking_goals1)
     booking_goals_json1 = json.loads(booking_goals_json1)
@@ -113,7 +115,7 @@ def main(email, password, box_name, box_id):
     booking_goals_json2 = json.loads(booking_goals_json2)
     # print("Booking goals:", booking_goals_json1)
     currentTime_a = datetime.now()
-    target_day = datetime.today() + timedelta(days=3)
+    target_day = datetime.today() + timedelta(days=7)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
     )
@@ -123,6 +125,7 @@ def main(email, password, box_name, box_id):
     class_id1 = get_class_to_book(classes, target_time1, target_name1, target_day)
     class_id2 = get_class_to_book(classes, target_time2, target_name2, target_day)
     print(target_day,target_time1, target_time2)
+    print("\n", classes, "\n")
     run_at_specific_time(client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)

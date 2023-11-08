@@ -2,7 +2,7 @@ name: Ejecución periódica
 
 on:
   schedule:
-    - cron: "45 21 * * *"
+    - cron: "45 07 * * *"
 
 jobs:
   run:
@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Date
         run: date
+      - name: Run (KAP)
+        run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
       # - name: Set timezone
       #   run: sudo timedatectl set-timezone "Europe/Madrid"
       # - name: Date
       #   run: date
-      #- name: Run (OPEN-BOX)
-      #  run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
      # - name: Print output
       #  run: docker logs hoysi
       # - name: Run fitbot (WOD)
