@@ -14,8 +14,8 @@ jobs:
       run: make docker/build
     - name: Lint and unit tests
       run: make docker/tests
-    - name: Run (KAP)
-      run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
+    # - name: Run (KAP)
+    #   run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
   # run-tryout:
   #   needs: build
   #   runs-on: ubuntu-latest
