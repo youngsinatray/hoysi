@@ -77,12 +77,14 @@ class AimHarderClient:
                 if "errorMssg" not in response and "errorMssgLang" not in response:
                     # booking went fine
                     return
-                if response["errorMssg"] == "No puedes tener más de 6 reservas simultáneas":
+                if (
+                    response["errorMssg"]
+                    == "No puedes tener más de 6 reservas simultáneas"
+                ):
                     raise BookingFailed(MESSAGE_BOOKING_FAILED_FULL_BOOKINGS)
                 if response["errorMssgLang"] == "NOPUEDESRESERVAMISMAHORA":
                     raise BookingFailed(MESSAGE_BOOKING_FAILED_ALREADY_BOOKED)
             raise BookingFailed(MESSAGE_BOOKING_FAILED_UNKNOWN)
         except Exception as e:
-            print("Exception: ",str(e))
+            print("Exception: ", str(e))
             pass
-
