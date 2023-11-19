@@ -43,8 +43,8 @@ def run_at_specific_time(
     time.sleep(wait_time)
 
     # Call your function here
-    print("Esperamos 2 segundos mas", datetime.now().strftime("%H:%M:%S"))
-    time.sleep(2)
+    print("Esperamos 1 segundos mas", datetime.now().strftime("%H:%M:%S"))
+    time.sleep(1)
 
     print(
         "PreBook for:",
@@ -54,12 +54,12 @@ def run_at_specific_time(
         " for ",
         class_id1,
     )
-    client.book_class(target_day, class_id1)
+    client.book_class(target_day, class_id2)
     # time.sleep(1)
     print(
         "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
     )
-    client.book_class(target_day, class_id2)
+    client.book_class(target_day, class_id1)
     print(
         "Second book for:",
         target_day,
@@ -112,7 +112,6 @@ def main(email, password, box_name, box_id):
         3: {"time": "1800_60", "name": "KAP Oly"},
         4: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
         5: {"time": "1200_60", "name": "KAP Weekend"},
-        # 6: {"time": "1200_60", "name": "Open Box"},
     }
     booking_goals2 = {
         0: {"time": "1900_60", "name": "KAP Crossfit"},
@@ -120,8 +119,6 @@ def main(email, password, box_name, box_id):
         2: {"time": "1900_60", "name": "KAP Crossfit"},
         3: {"time": "1900_60", "name": "KAP Crossfit"},
         4: {"time": "1900_60", "name": "KAP Crossfit"},
-        # 5: {"time": "1200_60", "name": "KAP Weekend"},
-        # 6: {"time": "1300_60", "name": "Open Box"},
     }
     booking_goals_json1 = json.dumps(booking_goals1)
     booking_goals_json1 = json.loads(booking_goals_json1)
