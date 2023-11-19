@@ -2,7 +2,7 @@ name: Ejecución periódica
 
 on:
   schedule:
-    - cron: "45 08 * * *"
+    - cron: "45 08 * * 1-6"
 
 jobs:
   run:
