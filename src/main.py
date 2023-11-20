@@ -42,17 +42,13 @@ def run_at_specific_time(
     wait_time = random.randint(0, 999999) / 1000000 + int(wait_time)
     time.sleep(wait_time)
 
-    # Call your function here
-    print("Esperamos 1 segundos mas", datetime.now().strftime("%H:%M:%S"))
-    time.sleep(1)
-
     print(
         "PreBook for:",
         target_day,
         " done at ",
         datetime.now().strftime("%H:%M:%S"),
         " for ",
-        class_id1,
+        class_id2,
     )
     client.book_class(target_day, class_id2)
     # time.sleep(1)
@@ -64,9 +60,7 @@ def run_at_specific_time(
         "Second book for:",
         target_day,
         " done at ",
-        datetime.now().strftime("%H:%M:%S"),
-        " for ",
-        class_id2,
+        datetime.now().strftime("%H:%M:%S")
     )
 
     print("PostBook", target_day, " done at ", datetime.now().strftime("%H:%M:%S"))
@@ -119,6 +113,7 @@ def main(email, password, box_name, box_id):
         2: {"time": "1900_60", "name": "KAP Crossfit"},
         3: {"time": "1900_60", "name": "KAP Crossfit"},
         4: {"time": "1900_60", "name": "KAP Crossfit"},
+        5: {"time": "1200_60", "name": "KAP Weekend"},
     }
     booking_goals_json1 = json.dumps(booking_goals1)
     booking_goals_json1 = json.loads(booking_goals_json1)
