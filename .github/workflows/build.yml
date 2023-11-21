@@ -21,6 +21,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: youngsinatra/hoysi:latest
     - name: Run (KAP)
       run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
   # run-tryout:
