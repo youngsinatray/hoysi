@@ -21,7 +21,7 @@ def run_at_specific_time(
     """
 
     now = datetime.now()
-    target_time = datetime.now().replace(hour=10, minute=00, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=12, minute=00, second=0, microsecond=0)
 
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception(
