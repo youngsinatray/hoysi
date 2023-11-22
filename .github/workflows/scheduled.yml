@@ -4,7 +4,7 @@ name: Ejecución periódica
 # Also be aware that you should keep 15 minutes before the desired time
 on:
   schedule:
-    - cron: "45 11 * * 1-6"
+    - cron: "45 08 * * 1-6"
 
 jobs:
   run:
