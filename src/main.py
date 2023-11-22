@@ -21,7 +21,7 @@ def run_at_specific_time(
     """
 
     now = datetime.now()
-    target_time = datetime.now().replace(hour=10, minute=00, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=11, minute=00, second=0, microsecond=0)
 
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception(
@@ -51,6 +51,7 @@ def run_at_specific_time(
         class_id2,
     )
     client.book_class(target_day, class_id2)
+    # time.sleep(1)
     print(
         "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
     )
