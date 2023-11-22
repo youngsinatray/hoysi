@@ -1,9 +1,10 @@
 name: Ejecución periódica
 
 # This must be one hour less too => "45 08 * * 1-6" => runs for 10 am
+# Also be aware that you should keep 15 minutes before the desired time
 on:
   schedule:
-    - cron: "05 11 * * 1-6"
+    - cron: "45 11 * * 1-6"
 
 jobs:
   run:
