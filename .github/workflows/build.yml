@@ -26,15 +26,3 @@ jobs:
         tags: youngsinatra/hoysi:latest
     - name: Run (KAP)
       run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
-  # run-tryout:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-    # - name: Date
-    #   run: date
-  #   - name: Set timezone
-  #     run: sudo timedatectl set-timezone "Europe/Madrid"
-    # - name: Date
-    #   run: date
-    # - name: Print output
-    #   run: docker logs hoysi

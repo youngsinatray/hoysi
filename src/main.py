@@ -21,7 +21,7 @@ def run_at_specific_time(
     """
 
     now = datetime.now()
-    target_time = datetime.now().replace(hour=12, minute=00, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=11, minute=20, second=0, microsecond=0)
 
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception(
@@ -130,8 +130,8 @@ def main(email, password, box_name, box_id):
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1, target_day)
     class_id2 = get_class_to_book(classes, target_time2, target_name2, target_day)
-    print(target_day, target_time1, target_time2)
-    print("\n", classes, "\n")
+    # print(target_day, target_time1, target_time2)
+    # print("\n", classes, "\n")
     run_at_specific_time(client, target_day, class_id1, class_id2)
     # client.book_class(target_day, class_id1)
     # client.book_class(target_day, class_id2)

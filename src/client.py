@@ -71,7 +71,7 @@ class AimHarderClient:
         try:
             if response.status_code == HTTPStatus.OK:
                 response = response.json()
-                print("Respuesta:", response)
+                # print("Respuesta:", response)
                 if "bookState" in response and response["bookState"] == -2:
                     raise BookingFailed(MESSAGE_BOOKING_FAILED_NO_CREDIT)
                 if "errorMssg" not in response and "errorMssgLang" not in response:
