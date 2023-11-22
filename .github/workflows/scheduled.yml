@@ -1,8 +1,9 @@
 name: Ejecución periódica
 
+# This must be one hour less too => "45 08 * * 1-6" => runs for 10 am
 on:
   schedule:
-    - cron: "45 10 * * 1-6"
+    - cron: "05 11 * * 1-6"
 
 jobs:
   run:
