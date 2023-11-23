@@ -11,7 +11,7 @@ from client import AimHarderClient
 
 
 def run_at_specific_time(
-    client: AimHarderClient, target_day: str, class_id1, class_id2
+    client: AimHarderClient, client2: AimHarderClient, target_day: str, class_id1, class_id2
 ):
     """
     Runs the function at a specific time.
@@ -22,7 +22,7 @@ def run_at_specific_time(
 
     now = datetime.now()
     # BC is one hour less, if you want 10 am => 9 am to run this
-    target_time = datetime.now().replace(hour=9, minute=00, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=10, minute=00, second=0, microsecond=0)
 
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception(
@@ -52,11 +52,13 @@ def run_at_specific_time(
         class_id2,
     )
     client.book_class(target_day, class_id2)
+    client2.book_class(target_day, class_id2)
     # time.sleep(1)
     print(
         "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
     )
     client.book_class(target_day, class_id1)
+    client2.book_class(target_day, class_id1)
     print(
         "Second book for:",
         target_day,
@@ -98,7 +100,7 @@ def get_class_to_book(
     return _class[0]["id"]
 
 
-def main(email, password, box_name, box_id):
+def main(email, password, box_name, box_id, email2, password2):
     print("MAIN: ")
     booking_goals1 = {
         0: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
@@ -120,22 +122,20 @@ def main(email, password, box_name, box_id):
     booking_goals_json1 = json.loads(booking_goals_json1)
     booking_goals_json2 = json.dumps(booking_goals2)
     booking_goals_json2 = json.loads(booking_goals_json2)
-    # print("Booking goals:", booking_goals_json1)
     currentTime_a = datetime.now()
     target_day = datetime.today() + timedelta(days=7)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
+    )
+    client2 = AimHarderClient(
+        email=email2, password=password2, box_id=box_id, box_name=box_name
     )
     target_time1, target_name1 = get_booking_goal_time(target_day, booking_goals_json1)
     target_time2, target_name2 = get_booking_goal_time(target_day, booking_goals_json2)
     classes = client.get_classes(target_day)
     class_id1 = get_class_to_book(classes, target_time1, target_name1, target_day)
     class_id2 = get_class_to_book(classes, target_time2, target_name2, target_day)
-    # print(target_day, target_time1, target_time2)
-    # print("\n", classes, "\n")
-    run_at_specific_time(client, target_day, class_id1, class_id2)
-    # client.book_class(target_day, class_id1)
-    # client.book_class(target_day, class_id2)
+    run_at_specific_time(client, client2, target_day, class_id1, class_id2)
     currentTime_b = datetime.now()
     print(
         "Diferencia desde el principio del main:",
@@ -162,6 +162,8 @@ if __name__ == "__main__":
     parser.add_argument("--password", required=True, type=str)
     parser.add_argument("--box-name", required=True, type=str)
     parser.add_argument("--box-id", required=True, type=int)
+    parser.add_argument("--email2", required=True, type=str)
+    parser.add_argument("--password2", required=True, type=str)
     # parser.add_argument("--booking-goals", required=False, type=str)
 
     args = parser.parse_args()
