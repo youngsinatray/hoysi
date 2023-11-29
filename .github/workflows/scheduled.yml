@@ -15,8 +15,8 @@ jobs:
       - name: Date
         run: date
       - name: Run (KAP)
-        run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }} -e email2=${{ secrets.EMAIL2 }} -e password2=${{ secrets.PASSWORD2 }}
-      # - name: Set timezone
+        run: docker run --name=hoysi -e email=${{ secrets.EMAIL }} -e password=${{ secrets.PASSWORD }} -e box-name=${{ secrets.BOX_NAME }} -e box-id=${{ secrets.BOX_ID }} -e email2=${{ secrets.EMAIL2 }} -e password2=${{ secrets.PASSWORD2 }} ${{ secrets.DOCKERHUB_IMAGE_VERSION }}
+        # - name: Set timezone
       #   run: sudo timedatectl set-timezone "Europe/Madrid"
       # - name: Date
       #   run: date
