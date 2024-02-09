@@ -40,7 +40,7 @@ def run_at_specific_time(
         raise Exception("Esa hora ya ha pasado", wait_time)
 
     print(f"Waiting for {wait_time} seconds...")
-    wait_time = random.randint(0, 999999) / 1000000 + int(wait_time)
+    wait_time = 1 + int(wait_time)
     time.sleep(wait_time)
 
     print(
