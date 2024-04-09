@@ -106,7 +106,6 @@ def main(email, password, box_name, box_id, email2, password2):
         1: {"time": "1800_60", "name": "KAP Oly"},
         2: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
         3: {"time": "1800_60", "name": "KAP Oly"},
-        4: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
         5: {"time": "1200_60", "name": "KAP Weekend"},
     }
     booking_goals2 = {
@@ -114,7 +113,6 @@ def main(email, password, box_name, box_id, email2, password2):
         1: {"time": "1900_60", "name": "KAP Crossfit"},
         2: {"time": "1900_60", "name": "KAP Crossfit"},
         3: {"time": "1900_60", "name": "KAP Crossfit"},
-        4: {"time": "1900_60", "name": "KAP Crossfit"},
         5: {"time": "1200_60", "name": "KAP Weekend"},
     }
     booking_goals_json1 = json.dumps(booking_goals1)
