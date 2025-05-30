@@ -21,7 +21,7 @@ def run_at_specific_time(
 
     now = datetime.now()
     # BC is one hour less, if you want 10 am => 9 am to run this
-    target_time = datetime.now().replace(hour=8, minute=00, second=0, microsecond=0)
+    target_time = datetime.now().replace(hour=9, minute=00, second=0, microsecond=0)
 
     if (int(target_time.strftime("%H")) - int(datetime.now().strftime("%H"))) > 60:
         raise Exception(
@@ -51,13 +51,13 @@ def run_at_specific_time(
         class_id2,
     )
     client.book_class(target_day, class_id2)
-    client2.book_class(target_day, class_id2)
+    # client2.book_class(target_day, class_id2)
     # time.sleep(1)
     print(
         "After 1st book", target_day, " done at ", datetime.now().strftime("%H:%M:%S")
     )
     client.book_class(target_day, class_id1)
-    client2.book_class(target_day, class_id1)
+    # client2.book_class(target_day, class_id1)
     print(
         "Second book for:",
         target_day,
@@ -102,17 +102,17 @@ def get_class_to_book(
 def main(email, password, box_name, box_id, email2, password2):
     print("MAIN: ")
     booking_goals1 = {
-        0: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
-        1: {"time": "1800_60", "name": "KAP Oly"},
-        2: {"time": "1800_60", "name": "KAP Functional BodyBuilding"},
-        3: {"time": "1800_60", "name": "KAP Oly"},
-        5: {"time": "1200_60", "name": "KAP Weekend"},
+        0: {"time": "1830_60", "name": "KAP Functional BodyBuilding"},
+        1: {"time": "1830_60", "name": "KAP Oly"},
+        2: {"time": "1830_60", "name": "KAP Functional BodyBuilding"},
+        3: {"time": "1830_60", "name": "KAP Oly"},
+        5: {"time": "1200_60", "name": "Crossfit."},
     }
     booking_goals2 = {
-        0: {"time": "1900_60", "name": "KAP Crossfit"},
-        1: {"time": "1900_60", "name": "KAP Crossfit"},
-        2: {"time": "1900_60", "name": "KAP Crossfit"},
-        3: {"time": "1900_60", "name": "KAP Crossfit"},
+        0: {"time": "1930_60", "name": "KAP Crossfit"},
+        1: {"time": "1930_60", "name": "KAP Crossfit"},
+        2: {"time": "1930_60", "name": "KAP Crossfit"},
+        3: {"time": "1930_60", "name": "KAP Crossfit"},
         5: {"time": "1200_60", "name": "KAP Weekend"},
     }
     booking_goals_json1 = json.dumps(booking_goals1)
@@ -120,7 +120,7 @@ def main(email, password, box_name, box_id, email2, password2):
     booking_goals_json2 = json.dumps(booking_goals2)
     booking_goals_json2 = json.loads(booking_goals_json2)
     currentTime_a = datetime.now()
-    target_day = datetime.today() + timedelta(days=7)
+    target_day = datetime.today() + timedelta(days=1)
     client = AimHarderClient(
         email=email, password=password, box_id=box_id, box_name=box_name
     )
